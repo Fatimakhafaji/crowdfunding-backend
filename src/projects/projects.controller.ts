@@ -4,49 +4,39 @@ import {
   Post,
   Body,
   Param,
-  Put,
+  Patch,
   Delete,
 } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
-import { Project } from './entities/project.entity';
+import { CreateProjectDto } from './dto/create-project.dto';
+import { UpdateProjectDto } from './dto/update-project.dto';
 
 @Controller('projects')
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Post()
-  create(
-    @Body()
-    projectData: {
-      title: string;
-      description: string;
-      targetAmount: number;
-      deadline: Date;
-    },
-  ): Promise<Project> {
+  create(@Body() projectData: CreateProjectDto) {
     return this.projectsService.create(projectData);
   }
 
   @Get()
-  findAll(): Promise<Project[]> {
+  findAll() {
     return this.projectsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<Project | null> {
+  findOne(@Param('id') id: string) {
     return this.projectsService.findOne(+id);
   }
 
-  @Put(':id')
-  update(
-    @Param('id') id: string,
-    @Body() projectData: { title?: string; description?: string },
-  ): Promise<Project> {
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() projectData: UpdateProjectDto) {
     return this.projectsService.update(+id, projectData);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string): Promise<Project> {
+  remove(@Param('id') id: string) {
     return this.projectsService.remove(+id);
   }
 }
