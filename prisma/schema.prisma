@@ -16,23 +16,11 @@ datasource db {
 model Project {
   id          Int      @id @default(autoincrement())
   title       String
-  description String
-  targetAmount Float
-  currentAmount Float @default(0)
-  deadline    DateTime
+  description String?
+  targetAmount Float    @default(0)
+  deadline    DateTime?  
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  owner       User     @relation(fields: [ownerId], references: [id])
-  ownerId     Int
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  name      String?
-  projects  Project[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
 
