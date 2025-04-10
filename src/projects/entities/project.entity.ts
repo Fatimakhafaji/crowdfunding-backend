@@ -1,19 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-import { ApiProperty } from '@nestjs/swagger';
-
 export class Project {
-  @ApiProperty()
   id: number;
-
-  @ApiProperty()
   title: string;
-
-  @ApiProperty({ required: false })
-  description?: string;
-
-  @ApiProperty()
+  description: string | null;
+  targetAmount: number;
+  deadline: Date | null;
   createdAt: Date;
-
-  @ApiProperty()
   updatedAt: Date;
 }
