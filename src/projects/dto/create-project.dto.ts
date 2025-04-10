@@ -1,16 +1,16 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsOptional, MaxLength } from 'class-validator';
+import { IsOptional, IsString, IsNumber } from 'class-validator';
 
 export class CreateProjectDto {
-  @ApiProperty()
   @IsString()
-  @IsNotEmpty()
-  @MaxLength(100)
   title: string;
 
-  @ApiProperty({ required: false })
   @IsString()
   @IsOptional()
-  @MaxLength(500)
-  description?: string;
+  description?: string | null;
+
+  @IsNumber()
+  targetAmount: number;
+
+  @IsOptional()
+  deadline?: Date | null;
 }
